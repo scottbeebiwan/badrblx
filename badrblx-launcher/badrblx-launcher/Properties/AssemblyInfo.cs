@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("assrblx-launcher")]
+[assembly: AssemblyTitle("badrblx-launcher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("assrblx-launcher")]
+[assembly: AssemblyProduct("badrblx-launcher")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ea495cbd-4cbe-4aa6-bd4d-e762fbea2a5a")]
+[assembly: Guid("e30ed367-a3a7-4920-a649-a562db269b19")]
 
 // Version information for an assembly consists of the following four values:
 //
