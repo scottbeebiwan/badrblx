@@ -28,7 +28,7 @@ namespace badrblx_launcher
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            HttpClient client = new HttpClient;
+            HttpClient client = new HttpClient();
             var postdict = new Dictionary<string, string>
             {
                 {"username", textBox1.Text},
@@ -44,23 +44,32 @@ namespace badrblx_launcher
             {
                 label3.Text = "Username or password incorrect";
                 button1.Enabled = true;
+                progressBar1.Value = 0;
             } else if (respStr == "serverid invalid") {
                 label3.Text = "ServerID Invalid";
+                progressBar1.Value = 0;
                 button1.Enabled = true;
             } else
             {
                 progressBar1.PerformStep(); label3.Text = "Launching Client";
                 Directory.SetCurrentDirectory("badrblx");
                 File.WriteAllText("join.lua", respStr);
-                Process.Start("robloxapp.exe", "-script \""+dofile("join.lua")+"\"");
+                Process.Start("robloxapp.exe", "-script \""+dofile(Directory.GetCurrentDirectory()+"\\join.lua")+"\"");
                 Directory.SetCurrentDirectory("..");
                 button1.Enabled = true;
+                label3.Text = "ScottBeebiWan 2018";
+                progressBar1.Value = 0;
             }
         }
         private static string dofile(string place)
         {
-            Regex p = new Regex("\\");
-            return "doFile(" + p.Replace(place, "/") + ")";
+            Regex p = new Regex("\\\\");
+            return "dofile('" + p.Replace(place, "/") + "')";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("cmd.exe", "/c start \"\" explorer %localappdata%\\roblox\\logs");
         }
     }
 }
