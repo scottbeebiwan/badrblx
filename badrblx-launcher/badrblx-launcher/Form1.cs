@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 
@@ -16,14 +17,60 @@ namespace badrblx_launcher
 {
     public partial class Form1 : Form
     {
+        static bool dlfin=false;
+        static string pps = "";
         public Form1()
         {
             InitializeComponent();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        void dpc(object sender, DownloadProgressChangedEventArgs e)
         {
-
+            progressBar1.Value=e.ProgressPercentage;
+            pps = e.ProgressPercentage.ToString();
+        }
+        void dlc(object sender, AsyncCompletedEventArgs e)
+        {
+            dlfin = true;
+        }
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            lockall(false);
+            label3.Text = "Checking for update...";
+            string tvr = "2b";
+            HttpClient client = new HttpClient();
+            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver");
+            var cv = await cvr.Content.ReadAsStringAsync();
+            if (tvr != cv) {
+                WebClient wc = new WebClient();
+                wc.DownloadProgressChanged += dpc;
+                wc.DownloadFileCompleted += dlc;
+                progressBar1.Maximum = 100;
+                label3.Text = "Downloading update...";
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-installer.exe"), "update.exe");
+                while (!dlfin) { await Task.Delay(25); }
+                dlfin = true;
+                label3.Text = "Installing update... (Please wait, the launcher will freeze)";
+                var p = Process.Start("update.exe");
+                Application.DoEvents();
+                p.WaitForExit();
+                label3.Text = "Exiting...";
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/aus.bat"), "..\\aus.bat");
+                while (!dlfin) { await Task.Delay(25); }
+                dlfin = true;
+                Process.Start("cmd.exe", "/c start ..\\aus.bat");
+                Application.Exit();
+            }
+            label3.Text = "ScottBeebiWan 2018";
+            lockall(true);
+        }
+        private void lockall(bool locc)
+        {
+            textBox1.Enabled = locc;
+            textBox2.Enabled = locc;
+            textBox3.Enabled = locc;
+            button1.Enabled = locc;
+            button2.Enabled = locc;
+            button3.Enabled = locc;
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -38,7 +85,7 @@ namespace badrblx_launcher
             var postme = new FormUrlEncodedContent(postdict);
             button1.Enabled = false;
             progressBar1.PerformStep(); label3.Text = "Logging in";
-            var resp = await client.PostAsync("https://scottbeebiwan.tk/badrblx/scripes/login.php", postme);
+            var resp = await client.PostAsync("https://badrblx.scottbeebiwan.tk/scripes/login.php", postme);
             var respStr = await resp.Content.ReadAsStringAsync();
             if (respStr == "user or pass wrong")
             {
@@ -52,10 +99,10 @@ namespace badrblx_launcher
             } else
             {
                 progressBar1.PerformStep(); label3.Text = "Launching Client";
-                Directory.SetCurrentDirectory("badrblx");
+                string respver = respStr.Substring(0,1);
+                respStr = respStr.Substring(1);
                 File.WriteAllText("join.lua", respStr);
                 Process.Start("robloxapp.exe", "-script \""+dofile(Directory.GetCurrentDirectory()+"\\join.lua")+"\"");
-                Directory.SetCurrentDirectory("..");
                 button1.Enabled = true;
                 label3.Text = "ScottBeebiWan 2018";
                 progressBar1.Value = 0;
@@ -70,6 +117,18 @@ namespace badrblx_launcher
         private void button2_Click(object sender, EventArgs e)
         {
             Process.Start("cmd.exe", "/c start \"\" explorer %localappdata%\\roblox\\logs");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            host hos = new host();
+            hos.Show();
+            Hide();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

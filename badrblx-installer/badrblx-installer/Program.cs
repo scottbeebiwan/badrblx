@@ -20,23 +20,23 @@ namespace badrblx_installer
             WebClient wc = new WebClient();
             wc.DownloadProgressChanged += dpc;
             wc.DownloadFileCompleted += dlc;
-            Uri uri = new Uri("https://scottbeebiwan.tk/badrblx/dls/badrblx-launcher.exe");
+            Uri uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-launcher.exe");
             wc.DownloadFileAsync(uri, "badrblx-launcher.exe");
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Downloading 7ZA");
-            uri = new Uri("https://scottbeebiwan.tk/badrblx/dls/7za.exe");
+            uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/7za.exe");
             wc.DownloadFileAsync(uri, "7za.exe");
             while (!dlfin) { }
             dlfin = false;
-            Console.WriteLine("Downloading Client");
-            uri = new Uri("https://scottbeebiwan.tk/badrblx/dls/client.7z");
+            Console.WriteLine("Downloading Clients");
+            uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/client.7z");
             wc.DownloadFileAsync(uri, "client.7z");
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Decompressing Client");
             Directory.CreateDirectory("badrblx");
-            var p = Process.Start("7za.exe", "x -obadrblx\\badrblx\\ client.7z");
+            var p = Process.Start("7za.exe", "x -obadrblx\\ client.7z");
             p.WaitForExit();
             Console.WriteLine("Moving files");
             File.Move("badrblx-launcher.exe", "badrblx\\badrblx-launcher.exe");
