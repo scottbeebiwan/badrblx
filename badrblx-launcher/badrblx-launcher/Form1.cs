@@ -100,11 +100,13 @@ namespace badrblx_launcher
             {
                 progressBar1.PerformStep(); label3.Text = "Launching Client";
                 string respver = respStr.Substring(0,1);
-                //respStr = respStr.Substring(1);
-                File.WriteAllText("br0\\join.lua", respStr);
-                string rootdir = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory("br0");
-                Process.Start("robloxapp.exe", "-script \""+dofile(Directory.GetCurrentDirectory()+"/join.lua")+"\"");
+                respStr = respStr.Substring(1);
+                if (respver=="0") {
+                    respStr = File.ReadAllText("brs\\Resizefix.lua") + "\n" + respStr;
+                }
+                File.WriteAllText("br" + respver + "\\join.lua", respStr);
+                Directory.SetCurrentDirectory("br"+respver);
+                Process.Start("robloxapp.exe", "-script \"" + dofile(Directory.GetCurrentDirectory() + "/join.lua") + "\"");
                 Directory.SetCurrentDirectory("..");
                 button1.Enabled = true;
                 label3.Text = "ScottBeebiWan 2018";
@@ -119,7 +121,7 @@ namespace badrblx_launcher
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Process.Start("cmd.exe", "/c start \"\" explorer %localappdata%\\roblox\\logs");
+            Process.Start("explorer", "%localappdata%\\roblox\\logs");
         }
 
         private void button3_Click(object sender, EventArgs e)
