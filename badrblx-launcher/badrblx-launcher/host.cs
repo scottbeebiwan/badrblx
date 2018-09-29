@@ -9,7 +9,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using System.Diagnostics
+using System.Diagnostics;
 
 namespace badrblx_launcher
 {
@@ -51,7 +51,24 @@ namespace badrblx_launcher
         {
             if (File.Exists(textBox1.Text))
             {
-                Process.Start("");
+                if (!(radioButton1.Checked || radioButton2.Checked))
+                {
+
+                } else {
+                    string client;
+                    if (radioButton1.Checked)
+                    {
+                        client = "9";
+                    }
+                    else
+                    {
+                        client = "0";
+                    }
+                    string rootdir = Directory.GetCurrentDirectory();
+                    Directory.SetCurrentDirectory("br"+client);
+                    Process.Start("robloxapp","-script \""+dofile(rootdir+"/brs/host.lua")+"\" \""+textBox1.Text+"\"");
+                    Directory.SetCurrentDirectory("..");
+                }
             } else
             {
                 MessageBox.Show("PUT IN A MAP FILE THAT EXISTS YOU  D I N G U S");
