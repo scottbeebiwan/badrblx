@@ -15,11 +15,11 @@ using System.Text.RegularExpressions;
 
 namespace badrblx_launcher
 {
-    public partial class Form1 : Form
+    public partial class mainmenu : Form
     {
         static bool dlfin=false;
         static string pps = "";
-        public Form1()
+        public mainmenu()
         {
             InitializeComponent();
         }
@@ -36,9 +36,9 @@ namespace badrblx_launcher
         {
             lockall(false);
             label3.Text = "Checking for update...";
-            string tvr = "2b";
+            string tvr = "3a";
             HttpClient client = new HttpClient();
-            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver");
+            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
             var cv = await cvr.Content.ReadAsStringAsync();
             if (tvr != cv) {
                 WebClient wc = new WebClient();

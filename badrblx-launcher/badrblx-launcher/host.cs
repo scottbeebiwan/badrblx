@@ -22,7 +22,7 @@ namespace badrblx_launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form1 f1 = new Form1();
+            mainmenu f1 = new mainmenu();
             f1.Show();
             this.Hide();
         }
