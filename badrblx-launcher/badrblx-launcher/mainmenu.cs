@@ -17,11 +17,13 @@ namespace badrblx_launcher
 {
     public partial class mainmenu : Form
     {
+        private static string[] cmd_args;
         static bool dlfin=false;
         static string pps = "";
-        public mainmenu()
+        public mainmenu(string[] args)
         {
             InitializeComponent();
+            cmd_args = args;
         }
         void dpc(object sender, DownloadProgressChangedEventArgs e)
         {
@@ -40,13 +42,15 @@ namespace badrblx_launcher
             HttpClient client = new HttpClient();
             var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
             var cv = await cvr.Content.ReadAsStringAsync();
+            if (cmd_args.Length > 0)
+            { if (cmd_args[0]=="update_test") { cv = tvr + "-random-invalidation-text"; } }
             if (tvr != cv) {
                 WebClient wc = new WebClient();
                 wc.DownloadProgressChanged += dpc;
                 wc.DownloadFileCompleted += dlc;
                 progressBar1.Maximum = 100;
                 label3.Text = "Downloading update...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-installer.exe"), "update.exe");
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
@@ -54,7 +58,7 @@ namespace badrblx_launcher
                 Application.DoEvents();
                 p.WaitForExit();
                 label3.Text = "Exiting...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/aus.bat"), "..\\aus.bat");
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/aus.bat"), "..\\aus.bat");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 Process.Start("cmd.exe", "/c start ..\\aus.bat");

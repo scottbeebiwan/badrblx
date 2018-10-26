@@ -22,7 +22,7 @@ namespace badrblx_launcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mainmenu f1 = new mainmenu();
+            mainmenu f1 = new mainmenu(new string[0]);
             f1.Show();
             this.Hide();
         }
@@ -51,27 +51,25 @@ namespace badrblx_launcher
         {
             if (File.Exists(textBox1.Text))
             {
-                if (!(radioButton1.Checked || radioButton2.Checked))
-                {
-
-                } else {
-                    string client;
-                    if (radioButton1.Checked)
-                    {
-                        client = "9";
-                    }
-                    else
-                    {
-                        client = "0";
-                    }
-                    string rootdir = Directory.GetCurrentDirectory();
-                    Directory.SetCurrentDirectory("br"+client);
-                    Process.Start("robloxapp","-script \""+dofile(rootdir+"/brs/host.lua")+"\" \""+textBox1.Text+"\"");
-                    Directory.SetCurrentDirectory("..");
-                }
+                string client = comboBoxVersion.Text;
+                string rootdir = Directory.GetCurrentDirectory();
+                Directory.SetCurrentDirectory("br"+client);
+                Process.Start("robloxapp","-script \""+dofile(rootdir+"/brs/host.lua")+"\" \""+textBox1.Text+"\"");
+                Directory.SetCurrentDirectory("..");
             } else
             {
                 MessageBox.Show("PUT IN A MAP FILE THAT EXISTS YOU  D I N G U S");
+            }
+        }
+
+        private void comboBoxVersion_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (Convert.ToInt16(comboBoxVersion.SelectedItem.ToString()) < 5)
+            {
+                labelVersion.Text = "201";
+            } else
+            {
+                labelVersion.Text = "200";
             }
         }
     }
