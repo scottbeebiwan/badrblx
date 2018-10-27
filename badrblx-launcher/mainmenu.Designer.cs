@@ -41,7 +41,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelDevWarn = new System.Windows.Forms.Label();
             this.seperator1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -156,15 +156,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label5
+            // labelDevWarn
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Comic Sans MS", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 191);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(190, 10);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "DEV BUILD - THIS SHOULD NOT BE RELEASED!";
+            this.labelDevWarn.AutoSize = true;
+            this.labelDevWarn.Font = new System.Drawing.Font("Comic Sans MS", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDevWarn.Location = new System.Drawing.Point(37, 191);
+            this.labelDevWarn.Name = "labelDevWarn";
+            this.labelDevWarn.Size = new System.Drawing.Size(190, 10);
+            this.labelDevWarn.TabIndex = 8;
+            this.labelDevWarn.Text = "DEV BUILD - THIS SHOULD NOT BE RELEASED!";
             // 
             // seperator1
             // 
@@ -173,7 +173,6 @@
             this.seperator1.Name = "seperator1";
             this.seperator1.Size = new System.Drawing.Size(292, 2);
             this.seperator1.TabIndex = 15;
-            this.seperator1.Click += new System.EventHandler(this.seperator1_Click);
             // 
             // label6
             // 
@@ -190,7 +189,7 @@
             this.ClientSize = new System.Drawing.Size(263, 262);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.seperator1);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelDevWarn);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
@@ -229,7 +228,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelDevWarn;
         private System.Windows.Forms.Label seperator1;
         private System.Windows.Forms.Label label6;
     }

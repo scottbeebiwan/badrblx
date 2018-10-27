@@ -18,11 +18,13 @@ namespace badrblx_launcher
     public partial class mainmenu : Form
     {
         private static string[] cmd_args;
-        static bool dlfin=false;
+        static bool dlfin = false;
+        static bool dev = true; //change this when releasing a client. VERY IMPORTANT!!!
         static string pps = "";
         public mainmenu(string[] args)
         {
             InitializeComponent();
+            labelDevWarn.Visible = dev;
             cmd_args = args;
         }
         void dpc(object sender, DownloadProgressChangedEventArgs e)
@@ -40,10 +42,9 @@ namespace badrblx_launcher
             label3.Text = "Checking for update...";
             string tvr = "3a";
             HttpClient client = new HttpClient();
-            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/dev/curver-dev");
+            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
             var cv = await cvr.Content.ReadAsStringAsync();
-            if (cmd_args.Length > 0)
-            { if (cmd_args[0]=="update_test") { cv = tvr + "-random-invalidation-text"; } }
+            if (cmd_args.Contains("update_test")) { cv = tvr + "-random-invalidation-text"; MessageBox.Show("Forced update initiated!", "badRBLX"); }
             if (tvr != cv) {
                 WebClient wc = new WebClient();
                 wc.DownloadProgressChanged += dpc;
@@ -54,7 +55,9 @@ namespace badrblx_launcher
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
-                var p = Process.Start("update.exe","update");
+                Process p;
+                if (dev) { p = Process.Start("update.exe", "update"); }
+                else { p = Process.Start("update.exe", "update dev"); }
                 Application.DoEvents();
                 p.WaitForExit();
             }
@@ -133,11 +136,6 @@ namespace badrblx_launcher
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void seperator1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

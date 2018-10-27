@@ -86,16 +86,6 @@ namespace badrblx_launcher
         {
             labelVersion.Text = "20?";
         }
-
-        private void labelVersion_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBoxVersion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
         private static string jsu(string place)
         {
             Regex p = new Regex("\\\\");

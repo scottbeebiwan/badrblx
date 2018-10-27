@@ -123,7 +123,6 @@
             this.comboBoxVersion.Size = new System.Drawing.Size(37, 21);
             this.comboBoxVersion.TabIndex = 12;
             this.comboBoxVersion.DropDown += new System.EventHandler(this.comboBoxVersion_DropDown);
-            this.comboBoxVersion.SelectedIndexChanged += new System.EventHandler(this.comboBoxVersion_SelectedIndexChanged);
             this.comboBoxVersion.SelectionChangeCommitted += new System.EventHandler(this.comboBoxVersion_SelectionChangeCommitted);
             // 
             // labelVersion
@@ -134,7 +133,6 @@
             this.labelVersion.Size = new System.Drawing.Size(25, 13);
             this.labelVersion.TabIndex = 13;
             this.labelVersion.Text = "200";
-            this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
             // 
             // openFileDialog1
             // 
