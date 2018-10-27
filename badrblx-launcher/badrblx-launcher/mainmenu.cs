@@ -140,5 +140,10 @@ namespace badrblx_launcher
         {
             Application.Exit();
         }
+
+        private void seperator1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

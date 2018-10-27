@@ -39,12 +39,13 @@
             this.comboBoxVersion = new System.Windows.Forms.ComboBox();
             this.labelVersion = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.seperator1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(100, 129);
+            this.button1.Location = new System.Drawing.Point(91, 133);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(70, 23);
             this.button1.TabIndex = 0;
@@ -55,7 +56,7 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(75, 103);
+            this.textBox1.Location = new System.Drawing.Point(75, 105);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(113, 20);
             this.textBox1.TabIndex = 1;
@@ -63,7 +64,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(9, 106);
+            this.label6.Location = new System.Drawing.Point(9, 108);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 13);
             this.label6.TabIndex = 4;
@@ -71,7 +72,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(176, 129);
+            this.button2.Location = new System.Drawing.Point(179, 133);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -93,7 +94,7 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 28);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(239, 71);
             this.pictureBox1.TabIndex = 11;
@@ -103,7 +104,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 7);
+            this.label3.Location = new System.Drawing.Point(12, 9);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(119, 16);
             this.label3.TabIndex = 10;
@@ -117,31 +118,44 @@
             "9",
             "0",
             "2"});
-            this.comboBoxVersion.Location = new System.Drawing.Point(45, 131);
+            this.comboBoxVersion.Location = new System.Drawing.Point(35, 134);
             this.comboBoxVersion.Name = "comboBoxVersion";
             this.comboBoxVersion.Size = new System.Drawing.Size(37, 21);
             this.comboBoxVersion.TabIndex = 12;
             this.comboBoxVersion.DropDown += new System.EventHandler(this.comboBoxVersion_DropDown);
+            this.comboBoxVersion.SelectedIndexChanged += new System.EventHandler(this.comboBoxVersion_SelectedIndexChanged);
             this.comboBoxVersion.SelectionChangeCommitted += new System.EventHandler(this.comboBoxVersion_SelectionChangeCommitted);
             // 
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(24, 135);
+            this.labelVersion.Location = new System.Drawing.Point(14, 138);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(25, 13);
             this.labelVersion.TabIndex = 13;
             this.labelVersion.Text = "200";
+            this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.DefaultExt = "rbxl";
+            this.openFileDialog1.Filter = "Roblox Places|*.rbxl|Roblox XML (2013 Studio)|*.rbxml";
+            this.openFileDialog1.Title = "badRBLX";
+            // 
+            // seperator1
+            // 
+            this.seperator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.seperator1.Location = new System.Drawing.Point(0, 128);
+            this.seperator1.Name = "seperator1";
+            this.seperator1.Size = new System.Drawing.Size(292, 2);
+            this.seperator1.TabIndex = 14;
             // 
             // host
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(263, 166);
+            this.Controls.Add(this.seperator1);
             this.Controls.Add(this.comboBoxVersion);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label3);
@@ -172,6 +186,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxVersion;
         private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        public System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label seperator1;
     }
 }

@@ -57,7 +57,8 @@ namespace badrblx_launcher
                 try
                 {
                     Directory.SetCurrentDirectory("br" + client);
-                    Process.Start("robloxapp", "-script \"" + dofile(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\"");
+                    if (client != "2") { Process.Start("robloxapp", "-script \"" + dofile(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\""); }
+                    else { Process.Start("robloxapp", "-joinscripturl \"" + jsu(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\""); }
                     Directory.SetCurrentDirectory("..");
                 }
                 catch (Win32Exception)
@@ -84,6 +85,21 @@ namespace badrblx_launcher
         private void comboBoxVersion_DropDown(object sender, EventArgs e)
         {
             labelVersion.Text = "20?";
+        }
+
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxVersion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private static string jsu(string place)
+        {
+            Regex p = new Regex("\\\\");
+            return p.Replace(place, "/");
         }
     }
 }
