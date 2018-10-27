@@ -38,7 +38,7 @@ namespace badrblx_launcher
         {
             lockall(false);
             label3.Text = "Checking for update...";
-            string tvr = "3a";
+            string tvr = "3abab";
             HttpClient client = new HttpClient();
             var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
             var cv = await cvr.Content.ReadAsStringAsync();
@@ -50,7 +50,7 @@ namespace badrblx_launcher
                 wc.DownloadFileCompleted += dlc;
                 progressBar1.Maximum = 100;
                 label3.Text = "Downloading update...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-installer.exe"), "update.exe");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
@@ -58,7 +58,7 @@ namespace badrblx_launcher
                 Application.DoEvents();
                 p.WaitForExit();
                 label3.Text = "Exiting...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/aus.bat"), "..\\aus.bat");
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/aus.bat"), "..\\aus.bat");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 Process.Start("cmd.exe", "/c start ..\\aus.bat");
