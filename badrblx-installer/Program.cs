@@ -17,23 +17,25 @@ namespace badrblx_installer
         static void Main(string[] args)
         {
             bool updater = false;
-            if (args.Length > 0) { if (args[0]=="update") { updater = true; } }
+            string rootpath = "https://badrblx.scottbeebiwan.tk/dls/";
+            if (args.Contains("update")) { updater = true; }
+            if (args.Contains("dev")) { rootpath += "dev/"; }
             if (updater) { Process.Start("taskkill", "/im badrblx-launcher.exe /f"); }
             Console.WriteLine("Downloading Launcher...");
             WebClient wc = new WebClient();
             wc.DownloadProgressChanged += dpc;
             wc.DownloadFileCompleted += dlc;
-            Uri uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-launcher.exe");
+            Uri uri = new Uri(rootpath+"badrblx-launcher.exe");
             wc.DownloadFileAsync(uri, "badrblx-launcher.exe");
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Downloading 7ZA");
-            uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/7za.exe");
+            uri = new Uri(rootpath + "7za.exe");
             wc.DownloadFileAsync(uri, "7za.exe");
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Downloading Clients");
-            uri = new Uri("https://badrblx.scottbeebiwan.tk/dls/client.7z");
+            uri = new Uri(rootpath + "client.7z");
             wc.DownloadFileAsync(uri, "client.7z");
             while (!dlfin) { }
             dlfin = false;

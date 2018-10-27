@@ -65,7 +65,8 @@ namespace badrblx_launcher
                 {
                     MessageBox.Show("The client you selected doesn't exist.", "badRBLX");
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("the file you selected has been confirmed for not-exist-world");
             }
@@ -86,6 +87,7 @@ namespace badrblx_launcher
         {
             labelVersion.Text = "20?";
         }
+
         private static string jsu(string place)
         {
             Regex p = new Regex("\\\\");
