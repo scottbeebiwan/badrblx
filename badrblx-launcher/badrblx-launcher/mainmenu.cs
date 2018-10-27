@@ -105,7 +105,8 @@ namespace badrblx_launcher
                 progressBar1.PerformStep(); label3.Text = "Launching Client";
                 string respver = respStr.Substring(0,1);
                 respStr = respStr.Substring(1);
-                if (respver=="0") {
+                if (respver=="0")
+                {
                     respStr = File.ReadAllText("brs\\Resizefix.lua") + "\n" + respStr;
                 }
                 File.WriteAllText("br" + respver + "\\join.lua", respStr);

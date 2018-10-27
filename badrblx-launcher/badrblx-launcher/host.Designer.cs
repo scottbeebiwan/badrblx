@@ -116,11 +116,12 @@
             this.comboBoxVersion.Items.AddRange(new object[] {
             "9",
             "0",
-            "1"});
+            "2"});
             this.comboBoxVersion.Location = new System.Drawing.Point(45, 131);
             this.comboBoxVersion.Name = "comboBoxVersion";
             this.comboBoxVersion.Size = new System.Drawing.Size(37, 21);
             this.comboBoxVersion.TabIndex = 12;
+            this.comboBoxVersion.DropDown += new System.EventHandler(this.comboBoxVersion_DropDown);
             this.comboBoxVersion.SelectionChangeCommitted += new System.EventHandler(this.comboBoxVersion_SelectionChangeCommitted);
             // 
             // labelVersion

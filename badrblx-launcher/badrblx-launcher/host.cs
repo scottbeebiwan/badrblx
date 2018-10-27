@@ -29,7 +29,8 @@ namespace badrblx_launcher
 
         private void host_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Application.Exit();
+            mainmenu f1 = new mainmenu(new string[0]);
+            f1.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -51,26 +52,38 @@ namespace badrblx_launcher
         {
             if (File.Exists(textBox1.Text))
             {
-                string client = comboBoxVersion.Text;
+                string client = comboBoxVersion.SelectedItem.ToString();
                 string rootdir = Directory.GetCurrentDirectory();
-                Directory.SetCurrentDirectory("br"+client);
-                Process.Start("robloxapp","-script \""+dofile(rootdir+"/brs/host.lua")+"\" \""+textBox1.Text+"\"");
-                Directory.SetCurrentDirectory("..");
+                try
+                {
+                    Directory.SetCurrentDirectory("br" + client);
+                    Process.Start("robloxapp", "-script \"" + dofile(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\"");
+                    Directory.SetCurrentDirectory("..");
+                }
+                catch (Win32Exception)
+                {
+                    MessageBox.Show("The client you selected doesn't exist.", "badRBLX");
+                }
             } else
             {
-                MessageBox.Show("PUT IN A MAP FILE THAT EXISTS YOU  D I N G U S");
+                MessageBox.Show("the file you selected has been confirmed for not-exist-world");
             }
         }
 
         private void comboBoxVersion_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (Convert.ToInt16(comboBoxVersion.SelectedItem.ToString()) < 5)
+            if (Convert.ToInt16(comboBoxVersion.SelectedItem.ToString()) < 7)
             {
                 labelVersion.Text = "201";
             } else
             {
                 labelVersion.Text = "200";
             }
+        }
+
+        private void comboBoxVersion_DropDown(object sender, EventArgs e)
+        {
+            labelVersion.Text = "20?";
         }
     }
 }
