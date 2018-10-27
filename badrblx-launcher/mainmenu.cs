@@ -38,9 +38,9 @@ namespace badrblx_launcher
         {
             lockall(false);
             label3.Text = "Checking for update...";
-            string tvr = "3abab";
+            string tvr = "3a";
             HttpClient client = new HttpClient();
-            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
+            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/dev/curver-dev");
             var cv = await cvr.Content.ReadAsStringAsync();
             if (cmd_args.Length > 0)
             { if (cmd_args[0]=="update_test") { cv = tvr + "-random-invalidation-text"; } }
@@ -50,7 +50,7 @@ namespace badrblx_launcher
                 wc.DownloadFileCompleted += dlc;
                 progressBar1.Maximum = 100;
                 label3.Text = "Downloading update...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/badrblx-installer.exe"), "update.exe");
+                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
