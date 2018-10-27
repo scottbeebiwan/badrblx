@@ -54,15 +54,9 @@ namespace badrblx_launcher
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
-                var p = Process.Start("update.exe");
+                var p = Process.Start("update.exe","update");
                 Application.DoEvents();
                 p.WaitForExit();
-                label3.Text = "Exiting...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/aus.bat"), "..\\aus.bat");
-                while (!dlfin) { await Task.Delay(25); }
-                dlfin = true;
-                Process.Start("cmd.exe", "/c start ..\\aus.bat");
-                Application.Exit();
             }
             label3.Text = "ScottBeebiWan 2018";
             lockall(true);

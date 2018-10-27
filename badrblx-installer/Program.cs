@@ -16,6 +16,9 @@ namespace badrblx_installer
 
         static void Main(string[] args)
         {
+            bool updater = false;
+            if (args.Length > 0) { if (args[0]=="update") { updater = true; } }
+            if (updater) { Process.Start("taskkill", "/im badrblx-launcher.exe /f"); }
             Console.WriteLine("Downloading Launcher...");
             WebClient wc = new WebClient();
             wc.DownloadProgressChanged += dpc;
@@ -35,17 +38,33 @@ namespace badrblx_installer
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Decompressing Client");
-            Directory.CreateDirectory("badrblx");
-            var p = Process.Start("7za.exe", "x -obadrblx\\ client.7z");
-            p.WaitForExit();
-            Console.WriteLine("Moving files");
-            File.Move("badrblx-launcher.exe", "badrblx\\badrblx-launcher.exe");
+            if (!updater)
+            {
+                Directory.CreateDirectory("badrblx");
+                var p = Process.Start("7za.exe", "x -obadrblx\\ client.7z");
+                p.WaitForExit();
+            } else
+            {
+                var p = Process.Start("7za.exe", "x -y client.7z");
+                p.WaitForExit();
+            }
+            if (!updater)
+            {
+                Console.WriteLine("Moving files");
+                File.Move("badrblx-launcher.exe", "badrblx\\badrblx-launcher.exe");
+            }
             Console.WriteLine("Deleting temporary files");
             File.Delete("client.7z");
             File.Delete("7za.exe");
-            Console.WriteLine("badRBLX was installed in the badRBLX folder in the same folder as the installer exe.");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            if (!updater)
+            {
+                Console.WriteLine("badRBLX was installed in the badRBLX folder in the same folder as the installer exe.");
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            } else
+            {
+                Process.Start("cmd", "/c start badrblx-launcher.exe");
+            }
         }
         static void dpc(object sender, DownloadProgressChangedEventArgs e)
         {
