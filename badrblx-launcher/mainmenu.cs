@@ -39,7 +39,18 @@ namespace badrblx_launcher
         private async void Form1_Load(object sender, EventArgs e)
         {
             lockall(false);
-            if (File.Exists("update.exe")) { File.Delete("update.exe"); }
+            if (File.Exists("update.exe")) { //delete updater
+                try { File.Delete("update.exe"); }
+                catch (IOException)
+                {
+                    Process.Start("taskkill", "/im update.exe /f").WaitForExit();
+                    try { File.Delete("update.exe"); }
+                    catch (IOException)
+                    {
+                        MessageBox.Show("Could not delete \"update.exe\".\nPlease delete it yourself.", "badRBLX");
+                    }
+                }
+            }
             label3.Text = "Checking for update...";
             string tvr = "3a";
             HttpClient client = new HttpClient();
