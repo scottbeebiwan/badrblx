@@ -42,7 +42,7 @@ namespace badrblx_launcher
             label3.Text = "Checking for update...";
             string tvr = "3a";
             HttpClient client = new HttpClient();
-            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver-dev");
+            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver"+ifdevreturn("-dev"));
             var cv = await cvr.Content.ReadAsStringAsync();
             if (cmd_args.Contains("update_test")) { cv = tvr + "-random-invalidation-text"; MessageBox.Show("Forced update initiated!", "badRBLX"); }
             if (tvr != cv) {
@@ -54,15 +54,23 @@ namespace badrblx_launcher
                 wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
                 while (!dlfin) { await Task.Delay(25); }
                 dlfin = true;
-                label3.Text = "Installing update... (Please wait, the launcher will freeze)";
-                Process p;
-                if (!dev) { p = Process.Start("update.exe", "update"); }
-                else { p = Process.Start("update.exe", "update dev"); }
+                label3.Text = "Installing update...";
+                Process p = Process.Start("update.exe", "update"+ifdevreturn(" dev"));
                 Application.DoEvents();
                 p.WaitForExit();
             }
             label3.Text = "ScottBeebiWan 2018";
             lockall(true);
+        }
+        private string ifdevreturn(string _in)
+        {
+            if (dev)
+            {
+                return _in;
+            } else
+            {
+                return "";
+            }
         }
         private void lockall(bool locc)
         {
