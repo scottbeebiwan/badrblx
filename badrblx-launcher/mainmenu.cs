@@ -53,23 +53,30 @@ namespace badrblx_launcher
             }
             label3.Text = "Checking for update...";
             string tvr = "3a";
-            HttpClient client = new HttpClient();
-            var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver"+ifdevreturn("-dev"));
-            var cv = await cvr.Content.ReadAsStringAsync();
-            if (cmd_args.Contains("update_test")) { cv = tvr + "-random-invalidation-text"; MessageBox.Show("Forced update initiated!", "badRBLX"); }
-            if (tvr != cv) {
-                WebClient wc = new WebClient();
-                wc.DownloadProgressChanged += dpc;
-                wc.DownloadFileCompleted += dlc;
-                progressBar1.Maximum = 100;
-                label3.Text = "Downloading update...";
-                wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
-                while (!dlfin) { await Task.Delay(25); }
-                dlfin = true;
-                label3.Text = "Installing update...";
-                Process p = Process.Start("update.exe", "update"+ifdevreturn(" dev"));
-                Application.DoEvents();
-                p.WaitForExit();
+            try
+            {
+                HttpClient client = new HttpClient();
+                var cvr = await client.GetAsync("https://badrblx.scottbeebiwan.tk/dls/curver" + ifdevreturn("-dev"));
+                var cv = await cvr.Content.ReadAsStringAsync();
+                if (cmd_args.Contains("update_test")) { cv = tvr + "-random-invalidation-text"; MessageBox.Show("Forced update initiated!", "badRBLX"); }
+                if (tvr != cv)
+                {
+                    WebClient wc = new WebClient();
+                    wc.DownloadProgressChanged += dpc;
+                    wc.DownloadFileCompleted += dlc;
+                    progressBar1.Maximum = 100;
+                    label3.Text = "Downloading update...";
+                    wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
+                    while (!dlfin) { await Task.Delay(25); }
+                    dlfin = true;
+                    label3.Text = "Installing update...";
+                    Process p = Process.Start("update.exe", "update" + ifdevreturn(" dev"));
+                    Application.DoEvents();
+                    p.WaitForExit();
+                }
+            } catch (Exception exc)
+            {
+                MessageBox.Show("Couldn't update\n" + exc.ToString(), "badRBLX");
             }
             label3.Text = "ScottBeebiWan 2018";
             lockall(true);
