@@ -39,6 +39,7 @@ namespace badrblx_launcher
         private async void Form1_Load(object sender, EventArgs e)
         {
             lockall(false);
+            if (File.Exists("update.exe")) { File.Delete("update.exe"); }
             label3.Text = "Checking for update...";
             string tvr = "3a";
             HttpClient client = new HttpClient();
