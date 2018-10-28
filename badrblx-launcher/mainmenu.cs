@@ -56,7 +56,7 @@ namespace badrblx_launcher
                 dlfin = true;
                 label3.Text = "Installing update... (Please wait, the launcher will freeze)";
                 Process p;
-                if (dev) { p = Process.Start("update.exe", "update"); }
+                if (!dev) { p = Process.Start("update.exe", "update"); }
                 else { p = Process.Start("update.exe", "update dev"); }
                 Application.DoEvents();
                 p.WaitForExit();
