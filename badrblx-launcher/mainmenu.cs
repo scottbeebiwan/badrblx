@@ -66,7 +66,7 @@ namespace badrblx_launcher
                     wc.DownloadFileCompleted += dlc;
                     progressBar1.Maximum = 100;
                     label3.Text = "Downloading update...";
-                    wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/dev/badrblx-installer.exe"), "update.exe");
+                    wc.DownloadFileAsync(new Uri("https://badrblx.scottbeebiwan.tk/dls/" + ifdevreturn("dev/") + "badrblx-installer.exe"), "update.exe");
                     while (!dlfin) { await Task.Delay(25); }
                     dlfin = true;
                     label3.Text = "Installing update...";
@@ -126,20 +126,23 @@ namespace badrblx_launcher
                 button1.Enabled = true;
             } else
             {
-                progressBar1.PerformStep(); label3.Text = "Launching Client";
-                string respver = respStr.Substring(0,1);
-                respStr = respStr.Substring(1);
-                if (respver=="0")
+                if (respver != "2")
                 {
-                    respStr = File.ReadAllText("brs\\Resizefix.lua") + "\n" + respStr;
+                    progressBar1.PerformStep(); label3.Text = "Launching Client";
+                    var respber = await client.PostAsync("https://badrblx.scottbeebiwan.tk/scripes/getid.php", postme);
+                    string respver = await respber.Content.ReadAsStringAsync();
+                    if (respver == "0" || respver == "1")
+                    {
+                        respStr = File.ReadAllText("brs\\Resizefix.lua") + "\n" + respStr;
+                    }
+                    File.WriteAllText("br" + respver + "\\join.lua", respStr);
+                    Directory.SetCurrentDirectory("br" + respver);
+                    Process.Start("robloxapp.exe", "-script \"" + dofile(Directory.GetCurrentDirectory() + "/join.lua") + "\"");
+                    Directory.SetCurrentDirectory("..");
+                    button1.Enabled = true;
+                    label3.Text = "ScottBeebiWan 2018";
+                    progressBar1.Value = 0;
                 }
-                File.WriteAllText("br" + respver + "\\join.lua", respStr);
-                Directory.SetCurrentDirectory("br"+respver);
-                Process.Start("robloxapp.exe", "-script \"" + dofile(Directory.GetCurrentDirectory() + "/join.lua") + "\"");
-                Directory.SetCurrentDirectory("..");
-                button1.Enabled = true;
-                label3.Text = "ScottBeebiWan 2018";
-                progressBar1.Value = 0;
             }
         }
         private static string dofile(string place)

@@ -117,6 +117,7 @@
             this.comboBoxVersion.Items.AddRange(new object[] {
             "9",
             "0",
+            "1",
             "2"});
             this.comboBoxVersion.Location = new System.Drawing.Point(35, 134);
             this.comboBoxVersion.Name = "comboBoxVersion";
