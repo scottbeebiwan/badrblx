@@ -52,7 +52,7 @@ namespace badrblx_launcher
                 }
             }
             label3.Text = "Checking for update...";
-            string tvr = "3a";
+            string tvr = "3b"; //VERSION!!!!!!!!!!!!!!!!
             try
             {
                 HttpClient client = new HttpClient();
@@ -126,29 +126,27 @@ namespace badrblx_launcher
                 button1.Enabled = true;
             } else
             {
+                postdict = new Dictionary<string, string>
+                {
+                    {"serverid", textBox3.Text}
+                };
+                postme = new FormUrlEncodedContent(postdict);
+                var respber = await client.PostAsync("https://badrblx.scottbeebiwan.tk/scripes/getid.php", postme);
+                string respver = await respber.Content.ReadAsStringAsync();
+                progressBar1.PerformStep(); label3.Text = "Launching Client";
+                Directory.SetCurrentDirectory("br" + respver);
                 if (respver != "2")
                 {
-                    progressBar1.PerformStep(); label3.Text = "Launching Client";
-                    var respber = await client.PostAsync("https://badrblx.scottbeebiwan.tk/scripes/getid.php", postme);
-                    string respver = await respber.Content.ReadAsStringAsync();
-                    if (respver == "0" || respver == "1")
-                    {
-                        respStr = File.ReadAllText("brs\\Resizefix.lua") + "\n" + respStr;
-                    }
-                    File.WriteAllText("br" + respver + "\\join.lua", respStr);
-                    Directory.SetCurrentDirectory("br" + respver);
-                    Process.Start("robloxapp.exe", "-script \"" + dofile(Directory.GetCurrentDirectory() + "/join.lua") + "\"");
-                    Directory.SetCurrentDirectory("..");
-                    button1.Enabled = true;
-                    label3.Text = "ScottBeebiWan 2018";
-                    progressBar1.Value = 0;
+                    Process.Start("robloxapp.exe", "-script \"https://badrblx.scottbeebiwan.tk/scripes/clientrun.php?session="+respStr+"\"");
+                } else
+                {
+                    Process.Start("robloxapp.exe", "-joinscript \"https://badrblx.scottbeebiwan.tk/scripes/clientrun.php?session=" + respStr + "\"");
                 }
+                Directory.SetCurrentDirectory("..");
+                button1.Enabled = true;
+                label3.Text = "ScottBeebiWan 2018";
+                progressBar1.Value = 0;
             }
-        }
-        private static string dofile(string place)
-        {
-            Regex p = new Regex("\\\\");
-            return "dofile('" + p.Replace(place, "/") + "')";
         }
 
         private void button2_Click(object sender, EventArgs e)
