@@ -57,7 +57,7 @@ namespace badrblx_launcher
                 try
                 {
                     Directory.SetCurrentDirectory("br" + client);
-                    if (client != "2") { Process.Start("robloxapp", "-script \"" + dofile(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\""); }
+                    if (client != "2") { Process.Start("robloxapp", "-script \"https://badrblx.scottbeebiwan.tk/scripes/host.lua\" \"" + textBox1.Text + "\""); }
                     else { Process.Start("robloxapp", "-joinscripturl \"" + jsu(rootdir + "/brs/host.lua") + "\" \"" + textBox1.Text + "\""); }
                     Directory.SetCurrentDirectory("..");
                 }

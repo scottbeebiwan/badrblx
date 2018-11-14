@@ -20,7 +20,7 @@ namespace badrblx_installer
             string rootpath = "https://badrblx.scottbeebiwan.tk/dls/";
             if (args.Contains("update")) { updater = true; }
             if (args.Contains("dev")) { rootpath += "dev/"; }
-            if (updater) { Process.Start("taskkill", "/im badrblx-launcher.exe /f"); }
+            if (updater) { Process.Start("taskkill", "/im badrblx-launcher.exe /f").WaitForExit(); }
             Console.WriteLine("Downloading Launcher...");
             WebClient wc = new WebClient();
             wc.DownloadProgressChanged += dpc;
@@ -35,24 +35,22 @@ namespace badrblx_installer
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Downloading Clients");
-            uri = new Uri(rootpath + "client.7z");
-            wc.DownloadFileAsync(uri, "client.7z");
+            uri = new Uri(rootpath + "clients.zip");
+            wc.DownloadFileAsync(uri, "clients.zip");
             while (!dlfin) { }
             dlfin = false;
             Console.WriteLine("Decompressing Client");
             if (!updater)
             {
                 Directory.CreateDirectory("badrblx");
-                var p = Process.Start("7za.exe", "x -obadrblx\\ client.7z");
-                p.WaitForExit();
+                Process.Start("7za.exe", "x -obadrblx\\ clients.zip").WaitForExit();
             } else
             {
-                var p = Process.Start("7za.exe", "x -y client.7z");
-                p.WaitForExit();
+                Process.Start("7za.exe", "x -y clients.zip").WaitForExit();
             }
             if (!updater)
             {
-                Console.WriteLine("Moving files");
+                Console.WriteLine("Moving files  ");
                 File.Move("badrblx-launcher.exe", "badrblx\\badrblx-launcher.exe");
             }
             Console.WriteLine("Deleting temporary files");

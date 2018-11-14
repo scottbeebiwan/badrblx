@@ -19,7 +19,7 @@ namespace badrblx_launcher
     {
         private static string[] cmd_args;
         static bool dlfin = false;
-        static bool dev = true; //change this when releasing a client. VERY IMPORTANT!!!
+        static bool dev = false; //change this when releasing a client. VERY IMPORTANT!!!
         static string pps = "";
         public mainmenu(string[] args)
         {
