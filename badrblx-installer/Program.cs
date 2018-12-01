@@ -54,7 +54,7 @@ namespace badrblx_installer
                 File.Move("badrblx-launcher.exe", "badrblx\\badrblx-launcher.exe");
             }
             Console.WriteLine("Deleting temporary files");
-            File.Delete("client.7z");
+            File.Delete("clients.zip");
             File.Delete("7za.exe");
             if (!updater)
             {
