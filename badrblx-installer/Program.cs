@@ -29,7 +29,7 @@ namespace badrblx_installer
             wc.DownloadFileAsync(uri, "badrblx-launcher.exe");
             while (!dlfin) { }
             dlfin = false;
-            Console.WriteLine("Downloading 7ZA..");
+            Console.WriteLine("Downloading 7ZA...");
             uri = new Uri(rootpath + "7za.exe");
             wc.DownloadFileAsync(uri, "7za.exe");
             while (!dlfin) { }
